@@ -183,7 +183,7 @@ async function main(watchMode = false): Promise<void> {
       backgroundTasks: getRunningTasks(hudState),
       cwd,
       lastSkill: transcriptData.lastActivatedSkill || null,
-      rateLimits,
+      rateLimitsResult: rateLimits ? { rateLimits } : null,
       customBuckets,
       pendingPermission: transcriptData.pendingPermission || null,
       thinkingState: transcriptData.thinkingState || null,

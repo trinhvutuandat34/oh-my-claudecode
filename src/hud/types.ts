@@ -175,6 +175,23 @@ export interface RateLimits {
 }
 
 // ============================================================================
+// Usage API Types
+// ============================================================================
+
+export type UsageErrorReason = 'network' | 'timeout' | 'http' | 'auth' | 'no_credentials';
+
+/**
+ * Result of fetching usage data from the API.
+ * - rateLimits: The rate limit data (null if no data available)
+ * - error: Set when the API call fails (undefined on success or no credentials)
+ */
+export interface UsageResult {
+  rateLimits: RateLimits | null;
+  /** Error reason when API call fails (undefined on success or no credentials) */
+  error?: UsageErrorReason;
+}
+
+// ============================================================================
 // Custom Rate Limit Provider
 // ============================================================================
 
@@ -277,8 +294,11 @@ export interface HudRenderContext {
   /** Last activated skill from transcript */
   lastSkill: SkillInvocation | null;
 
-  /** Rate limits (5h and weekly) from built-in Anthropic/z.ai providers */
-  rateLimits: RateLimits | null;
+  /** Rate limits result from built-in Anthropic/z.ai providers (includes error state) */
+  rateLimitsResult: UsageResult | null;
+
+  /** Error reason when built-in rate limit API call fails (undefined on success or no credentials) */
+  rateLimitsError?: UsageErrorReason;
 
   /** Custom rate limit buckets from rateLimitsProvider command (null when not configured) */
   customBuckets: CustomProviderResult | null;

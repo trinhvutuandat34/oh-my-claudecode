@@ -184,7 +184,7 @@ describe('gitInfoPosition configuration', () => {
     backgroundTasks: [],
     cwd: '/home/user/project',
     lastSkill: null,
-    rateLimits: null,
+    rateLimitsResult: null,
     customBuckets: null,
     pendingPermission: null,
     thinkingState: null,

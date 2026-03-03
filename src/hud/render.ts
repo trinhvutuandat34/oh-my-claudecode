@@ -156,10 +156,10 @@ export async function render(context: HudRenderContext, config: HudConfig): Prom
   }
 
   // Rate limits (5h and weekly)
-  if (enabledElements.rateLimits && context.rateLimits) {
+  if (enabledElements.rateLimits && context.rateLimitsResult?.rateLimits) {
     const limits = enabledElements.useBars
-      ? renderRateLimitsWithBar(context.rateLimits)
-      : renderRateLimits(context.rateLimits);
+      ? renderRateLimitsWithBar(context.rateLimitsResult.rateLimits)
+      : renderRateLimits(context.rateLimitsResult.rateLimits);
     if (limits) elements.push(limits);
   }
 
